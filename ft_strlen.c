@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 16:46:20 by mbenjell          #+#    #+#             */
-/*   Updated: 2016/11/28 21:35:01 by mbenjell         ###   ########.fr       */
+/*   Updated: 2016/12/09 02:14:11 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t		ft_strlen(const char *s)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (*s++)
