@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 23:03:23 by mbenjell          #+#    #+#             */
-/*   Updated: 2016/12/06 03:10:18 by mbenjell         ###   ########.fr       */
+/*   Updated: 2016/12/06 13:44:29 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_pnbr(char *p, int i, int n)
 		ft_strcpy(p, "-2147483648");
 	if (n == 0)
 		ft_strcpy(p, "0");
-	if (n > -2147483648)
+	if (n > 0)
 	{
 		while (n)
 		{
