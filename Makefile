@@ -6,7 +6,7 @@
 #    By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/26 20:35:11 by mbenjell          #+#    #+#              #
-#    Updated: 2016/12/03 20:16:43 by mbenjell         ###   ########.fr        #
+#    Updated: 2017/02/14 18:22:33 by mbenjell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC =	ft_memset.c \
 		ft_lstdel.c \
 		ft_lstadd.c \
 		ft_lstiter.c \
-		ft_lstmap.c
+		ft_lstmap.c \
+		get_next_line.c
 
 FLAG = -Wall -Werror -Wextra
 

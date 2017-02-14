@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 22:05:53 by mbenjell          #+#    #+#             */
-/*   Updated: 2016/12/05 20:04:24 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/02/14 18:21:58 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,35 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+
+# define BUFF_SIZE 42
+# define SEP '\n'
+# define END '\0'
+
+typedef struct		s_save
+{
+	int				fd;
+	char			*buff_init;
+	char			*buff;
+	char			*p;
+	int				nb;
+	int				fin;
+	int				i;
+	struct s_mem	*mem;
+	struct s_save	*next;
+}					t_save;
+
+typedef struct		s_mem
+{
+	char			*m;
+	int				nb;
+	struct s_mem	*next;
+}					t_mem;
+
+int					new_file(int fd, int *start, t_save *s);
+int					read_line(t_save *s);
+int					write_line(t_mem *m, char **line, int i);
+int					write_mem(t_save *s);
+int					get_next_line(const int fd, char **line);
 
 #endif
