@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 22:05:53 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/02/14 18:21:58 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/02/26 14:16:20 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
 
 typedef unsigned char	t_oct;
 
@@ -89,6 +90,7 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+void 				ft_swap(void *a, void *b);
 
 # define BUFF_SIZE 42
 # define SEP '\n'
