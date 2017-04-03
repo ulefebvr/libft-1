@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:25:39 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/02/14 18:23:57 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/04/03 13:41:32 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,15 @@ int					read_line(t_save *s)
 		s->buff_init = s->buff;
 		s->nb = read(s->fd, s->buff, BUFF_SIZE);
 		if (s->nb == -1)
+		{
+			ft_strdel(&(s->buff_init));
 			return (-1);
+		}
 		if (!s->nb)
+		{
+			ft_strdel(&(s->buff_init));
 			return (s->fin = 0);
+		}
 	}
 	return ((write_mem(s) == -1) ? -1 : s->fin);
 }
