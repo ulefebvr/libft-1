@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 16:47:18 by mbenjell          #+#    #+#             */
-/*   Updated: 2016/12/05 16:14:37 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/04/20 17:21:55 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 char		*ft_strnstr(const char *big, const char *little, size_t n)
 {
-	int i;
-
-	i = big[0];
 	if (ft_strlen(little) == 0)
 		return ((char*)big);
 	if (n < ft_strlen(little))
