@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:25:39 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/04/03 13:41:32 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/02 20:08:21 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,58 +22,6 @@ int					new_file(int fd, int *start, t_save *s)
 	s->nb = 0;
 	s->fin = 1;
 	s->mem = NULL;
-	return (0);
-}
-
-int					read_line(t_save *s)
-{
-	if (!s->nb)
-	{
-		free(s->buff_init);
-		if (!(s->buff = (char*)malloc(sizeof(char) * BUFF_SIZE)))
-			return (-1);
-		s->buff_init = s->buff;
-		s->nb = read(s->fd, s->buff, BUFF_SIZE);
-		if (s->nb == -1)
-		{
-			ft_strdel(&(s->buff_init));
-			return (-1);
-		}
-		if (!s->nb)
-		{
-			ft_strdel(&(s->buff_init));
-			return (s->fin = 0);
-		}
-	}
-	return ((write_mem(s) == -1) ? -1 : s->fin);
-}
-
-int					write_mem(t_save *s)
-{
-	t_mem			*new;
-
-	if (!(new = (t_mem*)malloc(sizeof(t_mem))))
-		return (-1);
-	if (!(s->p = ft_memchr((const void*)(s->buff), SEP, s->nb)))
-	{
-		new->next = s->mem;
-		s->mem = new;
-		(s->mem)->m = (char*)malloc(sizeof(char) * s->nb);
-		ft_memcpy((void*)(s->mem)->m, (const void*)s->buff, s->nb);
-		s->mem->nb = s->nb;
-		s->nb = 0;
-		s->fin = ((read_line(s) == -1) ? -1 : 1);
-	}
-	else
-	{
-		new->next = s->mem;
-		s->mem = new;
-		(s->mem)->m = (char*)malloc(sizeof(char) * s->nb);
-		ft_memcpy((void*)(s->mem)->m, (const void*)(s->buff), s->p - s->buff);
-		s->mem->nb = s->p - s->buff;
-		s->nb -= s->p - s->buff + 1;
-		s->buff += s->p - s->buff + 1;
-	}
 	return (0);
 }
 
@@ -121,7 +69,7 @@ int					get_next_line(const int fd, char **line)
 		return (0);
 	if (!start)
 		new_file(fd, &start, s);
-	if (((s->i = read_line(s)) != -1) && (write_line(s->mem, line, 0) == -1))
+	if (((s->i = get_line(s)) != -1) && (write_line(s->mem, line, 0) == -1))
 		return (-1);
 	if ((s->i == 0) && ft_strlen(*line) == 0)
 		return (new_file(fd, &start, s));

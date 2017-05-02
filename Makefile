@@ -6,7 +6,7 @@
 #    By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/26 20:35:11 by mbenjell          #+#    #+#              #
-#    Updated: 2017/03/06 18:41:12 by mbenjell         ###   ########.fr        #
+#    Updated: 2017/05/02 19:53:32 by mbenjell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC =	ft_memset.c \
 		ft_lstadd.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
+		get_line.c \
 		get_next_line.c \
 		ft_swap.c
 
