@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:25:39 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/03 17:02:59 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/03 17:34:01 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int					write_line(t_mem *mem, char **line, size_t *j)
 {
 	t_mem *temp;
 
-	*line = (char*)ft_memalloc(sizeof(char) * (*j + 1));
+	if (!(*line = (char*)ft_memalloc(sizeof(char) * (*j + 1))))
+		return (-1);
 	*line += *j;
 	**line = END;
 	while (mem)
