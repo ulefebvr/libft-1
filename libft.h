@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 22:05:53 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/02 19:58:48 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/03 15:50:30 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+# include <stdint.h>
+
 # include <stdio.h>
 
 typedef unsigned char	t_oct;
 
 # define ABS(x) (x < 0 ? -x : x)
+# define MAX_ALLOC SIZE_MAX / 2
 
 typedef struct		s_list
 {
@@ -106,6 +109,7 @@ typedef struct		s_save
 	int				nb;
 	int				fin;
 	int				i;
+	size_t			j;
 	struct s_mem	*mem;
 	struct s_save	*next;
 }					t_save;
@@ -119,7 +123,7 @@ typedef struct		s_mem
 
 int					new_file(int fd, int *start, t_save *s);
 int					write_line(t_mem *m, char **line, int i);
-int 				get_line(t_save *s);
+int					get_line(t_save *s);
 int					get_next_line(const int fd, char **line);
 
 #endif
