@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:25:39 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/03 17:34:01 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/04 13:30:04 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,26 @@ int					new_file(int fd, int *start, t_save *s)
 	return (0);
 }
 
-int					write_line(t_mem *mem, char **line, size_t *j)
+int					write_line(t_mem *mem, char **line, int i)
 {
-	t_mem *temp;
+	static int		j;
 
-	if (!(*line = (char*)ft_memalloc(sizeof(char) * (*j + 1))))
-		return (-1);
-	*line += *j;
-	**line = END;
-	while (mem)
+	if (mem)
 	{
-		ft_memcpy((void*)(*line -= mem->nb), (const void*)(mem->m), mem->nb);
-		temp = mem;
-		mem = mem->next;
-		free(temp->m);
-		free(temp);
+		if (write_line(mem->next, line, i + mem->nb) == -1)
+			return (-1);
+		ft_memcpy((void*)(*line + j), (const void*)mem->m, mem->nb);
+		j += mem->nb;
+		free(mem->m);
+		free(mem);
 	}
-	*j = 0;
+	else
+	{
+		if (!(*line = (char*)malloc(sizeof(char) * (i + 1))))
+			return (-1);
+		j = 0;
+		*(*line + i) = END;
+	}
 	return (0);
 }
 
@@ -66,7 +69,7 @@ int					get_next_line(const int fd, char **line)
 		return (0);
 	if (!start)
 		new_file(fd, &start, s);
-	if (((s->i = get_line(s)) != -1) && (write_line(s->mem, line, &s->j) == -1))
+	if (((s->i = get_line(s)) != -1) && (write_line(s->mem, line, 0) == -1))
 		return (-1);
 	if ((s->i == 0) && ft_strlen(*line) == 0)
 		return (new_file(fd, &start, s));
