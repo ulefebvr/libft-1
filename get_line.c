@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:19:34 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/04 14:23:26 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/04 15:04:28 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,8 @@ int			begin_read(t_save *s, t_mem **new)
 	if (!(*new = (t_mem*)malloc(sizeof(t_mem))))
 		return (-1);
 	if (!s->nb)
-	{
-		r = new_buff(s);
-		if (r == 0)
-			return (0);
-		if (r == -1)
-			return (-1);
-	}
+		if ((r = new_buff(s)) == 0 || r == -1)
+			return (r);
 	return (1);
 }
 
@@ -87,11 +82,8 @@ int			get_line(t_save *s)
 
 	while (42)
 	{
-		b = begin_read(s, &new);
-		if (b == 0)
-			return (0);
-		if (b == -1)
-			return (-1);
+		if ((b = begin_read(s, &new)) == 0 || b == -1)
+			return (b);
 		if (nsearch(s, new) == 1)
 			return (1);
 	}
