@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:19:34 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/04 13:25:56 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/04 14:23:26 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int			nsearch(t_save *s, t_mem *new)
 	{
 		new->next = s->mem;
 		s->mem = new;
-		(s->mem)->m = (char*)malloc(sizeof(char) * s->nb);
+		if (!((s->mem)->m = (char*)malloc(sizeof(char) * s->nb)))
+			return (-1);
 		ft_memcpy((void*)(s->mem)->m, (const void*)s->buff, s->nb);
 		s->mem->nb = s->nb;
 		s->nb = 0;
@@ -67,7 +68,8 @@ int			nsearch(t_save *s, t_mem *new)
 	{
 		new->next = s->mem;
 		s->mem = new;
-		(s->mem)->m = (char*)malloc(sizeof(char) * s->nb);
+		if (!((s->mem)->m = (char*)malloc(sizeof(char) * s->nb)))
+			return (-1);
 		ft_memcpy((void*)(s->mem)->m, (const void*)(s->buff), s->p - s->buff);
 		s->mem->nb = s->p - s->buff;
 		s->nb -= s->p - s->buff + 1;
