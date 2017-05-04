@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:19:34 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/04 15:04:28 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/04 15:10:16 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int			begin_read(t_save *s, t_mem **new)
 		return (-1);
 	if (!s->nb)
 		if ((r = new_buff(s)) == 0 || r == -1)
+		{
+			free(*new);
 			return (r);
+		}
 	return (1);
 }
 
