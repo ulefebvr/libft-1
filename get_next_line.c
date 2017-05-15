@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:25:39 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/15 16:51:01 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/16 00:51:09 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int					write_line(t_save *s, char **line)
 		mem = mem->next;
 		free(temp->m);
 		free(temp);
+		temp->m = NULL;
+		temp = NULL;
 	}
+	s->j = 0;
 	s->mem = NULL;
 	return (0);
 }

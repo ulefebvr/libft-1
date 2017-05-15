@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 22:05:53 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/04 13:26:37 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:19:40 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct		s_mem
 }					t_mem;
 
 int					new_file(int fd, int *start, t_save *s);
-int					write_line(t_mem *mem, char **line, int i);
+int					write_line(t_save *s, char **line);
 int					get_line(t_save *s);
 int					get_next_line(const int fd, char **line);
 
