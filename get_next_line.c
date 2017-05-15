@@ -6,7 +6,7 @@
 /*   By: mbenjell <mbenjell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:25:39 by mbenjell          #+#    #+#             */
-/*   Updated: 2017/05/04 13:30:04 by mbenjell         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:51:01 by mbenjell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,33 @@ int					new_file(int fd, int *start, t_save *s)
 	s->buff = NULL;
 	s->p = NULL;
 	s->nb = 0;
+	s->j = 0;
 	s->fin = 1;
 	s->mem = NULL;
 	return (0);
 }
 
-int					write_line(t_mem *mem, char **line, int i)
+int					write_line(t_save *s, char **line)
 {
-	static int		j;
+	t_mem			*mem;
+	t_mem			*temp;
+	char			*line_start;
 
-	if (mem)
+	if (!(*line = ft_memalloc(sizeof(char) * (s->j + 1))))
+		return (-1);
+	mem = s->mem;
+	line_start = *line;
+	line_start += s->j;
+	while (mem)
 	{
-		if (write_line(mem->next, line, i + mem->nb) == -1)
-			return (-1);
-		ft_memcpy((void*)(*line + j), (const void*)mem->m, mem->nb);
-		j += mem->nb;
-		free(mem->m);
-		free(mem);
+		line_start -= mem->nb;
+		ft_memcpy(line_start, mem->m, mem->nb);
+		temp = mem;
+		mem = mem->next;
+		free(temp->m);
+		free(temp);
 	}
-	else
-	{
-		if (!(*line = (char*)malloc(sizeof(char) * (i + 1))))
-			return (-1);
-		j = 0;
-		*(*line + i) = END;
-	}
+	s->mem = NULL;
 	return (0);
 }
 
@@ -69,7 +71,7 @@ int					get_next_line(const int fd, char **line)
 		return (0);
 	if (!start)
 		new_file(fd, &start, s);
-	if (((s->i = get_line(s)) != -1) && (write_line(s->mem, line, 0) == -1))
+	if (((s->i = get_line(s)) != -1) && (write_line(s, line) == -1))
 		return (-1);
 	if ((s->i == 0) && ft_strlen(*line) == 0)
 		return (new_file(fd, &start, s));
