@@ -117,6 +117,7 @@ char			**ft_strsplit(char const *s, char c)
 		*tab = NULL;
 		return (tab);
 	}
+	free(temp);
 	ft_extend(tab, len, chaine, c);
 	return (!tab_init ? NULL : tab_init);
 }
